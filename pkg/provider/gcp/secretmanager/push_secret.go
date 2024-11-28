@@ -79,7 +79,12 @@ func (b *psBuilder) buildMetadata(_, labels map[string]string, _ []*secretmanage
 
 	newLabels := map[string]string{}
 	if metadata.Labels != nil {
-		newLabels = metadata.Labels
+		for key, value := range metadata.Labels {
+			newLabels[key] = value
+		}
+	}
+	for key, value := range labels {
+		newLabels[key] = value
 	}
 	newLabels[managedByKey] = managedByValue
 
